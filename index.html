@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Lyrata • Olomouc</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap');
+
+        :root {
+            --beige: #f5f5dc;
+            --green: #4a6b2f;        /* tmavší, sytější zelená */
+            --darkgreen: #3d5a27;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--beige);
+            color: #3f3f3f;
+        }
+
+        .heading-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* HERO */
+        .hero-bg {
+            background-image:
+                linear-gradient(rgba(74, 107, 47, 0.55), rgba(74, 107, 47, 0.68)),
+                url('https://files.catbox.moe/195b1c.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 55%;
+            background: linear-gradient(transparent, var(--beige));
+        }
+
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--green);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .event-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .event-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px -12px rgb(74 107 47 / 0.3);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- NAVIGACE -->
+    <nav class="bg-white/95 backdrop-blur-md border-b border-[#e8e4d8] sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-leaf text-3xl text-[#4a6b2f]"></i>
+                <h1 class="text-2xl heading-font tracking-tight text-[#4a6b2f]">Café Lyrata</h1>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#o-nas" class="nav-link text-gray-700 hover:text-[#4a6b2f]">O nás</a>
+                <a href="#akce" class="nav-link text-gray-700 hover:text-[#4a6b2f]">Akce</a>
+                <a href="#prostor" class="nav-link text-gray-700 hover:text-[#4a6b2f]">Prostor</a>
+                <a href="#menu" class="nav-link text-gray-700 hover:text-[#4a6b2f]">Menu</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero-bg h-screen flex items-center relative text-white">
+        <div class="max-w-4xl mx-auto px-6 text-center z-10">
+            <h1 class="text-7xl md:text-8xl heading-font font-light tracking-tighter mb-6">
+                Café Lyrata
+            </h1>
+            <p class="text-2xl md:text-3xl font-light tracking-wide text-white/90 mb-12 max-w-3xl mx-auto">
+                místo, kde se výběrová káva a ceremoniální matcha pojí s přírodou
+            </p>
+            
+            <a href="#akce" 
+               class="inline-flex px-10 py-4 bg-white text-[#4a6b2f] rounded-full font-medium hover:bg-[#f5f5dc] transition-all text-lg items-center gap-3">
+                <i class="fa-solid fa-calendar-day"></i>
+                Zjistit aktuální akce
+            </a>
+        </div>
+
+        <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 text-white/70 text-sm">
+            <div class="w-px h-16 bg-gradient-to-b from-transparent via-white/60 to-transparent"></div>
+            <span class="tracking-widest">SCROLL</span>
+        </div>
+    </section>
+
+    <!-- O NÁS -->
+    <section id="o-nas" class="py-24 bg-white">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-5xl heading-font font-light text-[#4a6b2f] mb-6">O nás</h2>
+            <p class="text-xl text-gray-600 leading-relaxed">
+                Café Lyrata je malé útočiště v Olomouci, kde se spojuje láska k výběrové kávě, ceremoniální matcha 
+                a krásné přírodní atmosféře plné zeleně.
+            </p>
+        </div>
+    </section>
+
+    <!-- AKCE -->
+    <section id="akce" class="py-24 bg-[#f5f5dc]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="uppercase tracking-widest text-[#4a6b2f] text-sm font-medium">Co se děje</span>
+                <h2 class="text-5xl heading-font font-light text-gray-800 mt-2">Následující akce</h2>
+            </div>
+
+            <!-- Posunuté doleva + větší max-šířka -->
+            <div onclick="showEventDetail()" 
+                 class="event-card max-w-lg mx-auto md:mx-0 bg-white rounded-3xl overflow-hidden shadow-xl cursor-pointer group">
+                <div class="relative h-80">
+                    <img src="https://picsum.photos/id/1016/800/800" 
+                         alt="Rooftop Pilates a skupinový brunch"
+                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                    <div class="absolute top-6 left-6 bg-white/95 backdrop-blur-sm text-[#4a6b2f] px-5 py-2 rounded-2xl text-sm font-medium shadow">
+                        22. května 2026
+                    </div>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-3xl heading-font font-light text-gray-800 mb-2">Rooftop Pilates a skupinový brunch</h3>
+                    <p class="text-gray-600">Kombinace příjemného pohybu a společné snídaně na krásné terase naší kavárny.</p>
+                    
+                    <div class="mt-8 flex items-center justify-between text-sm">
+                        <div class="flex items-center gap-2 text-[#4a6b2f]">
+                            <i class="fa-solid fa-clock"></i>
+                            <span>8:00 – 10:30</span>
+                        </div>
+                        <div class="text-[#4a6b2f] font-medium flex items-center gap-1 group-hover:gap-3 transition-all">
+                            Více informací →
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROSTOR -->
+    <section id="prostor" class="py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h2 class="text-5xl heading-font font-light text-[#4a6b2f] mb-6">Prostor</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Nacházíme se v centru Olomouce. Velká okna, spousta pokojových rostlin – především krásné fíkusy lyrata – 
+                a příjemné posezení vytvářejí klidnou a harmonickou atmosféru.
+            </p>
+        </div>
+    </section>
+
+    <!-- MENU -->
+    <section id="menu" class="py-24 bg-[#f5f5dc]">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-5xl heading-font font-light text-[#4a6b2f] mb-6">Menu</h2>
+            <p class="text-xl text-gray-600">Naše menu je momentálně ve vývoji.</p>
+            <p class="mt-6 text-[#4a6b2f] font-medium">Brzy zde najdete naši nabídku speciality kávy, ceremoniální matcha, snídaní a domácích dezertů.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#4a6b2f] text-white py-20">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12">
+            <div>
+                <div class="flex items-center gap-3 mb-6">
+                    <i class="fa-solid fa-leaf text-4xl"></i>
+                    <h3 class="text-3xl heading-font">Café Lyrata</h3>
+                </div>
+                <p class="text-green-100">Místo, kde se výběrová káva a ceremoniální matcha setkávají s přírodou uprostřed Olomouce.</p>
+            </div>
+            
+            <div>
+                <h4 class="font-medium mb-6">Kontakt</h4>
+                <p class="text-green-100">
+                    17. listopadu 1230/8a<br>
+                    779 00 Olomouc<br><br>
+                    <a href="tel:+420731063499" class="hover:text-white">731 063 499</a><br>
+                    <a href="mailto:kavarnalyrata@gmail.com" class="hover:text-white">kavarnalyrata@gmail.com</a><br>
+                    <a href="https://www.instagram.com/lyrata_cafe" target="_blank" class="hover:text-white">@lyrata_cafe</a>
+                </p>
+            </div>
+            
+            <div>
+                <h4 class="font-medium mb-6">Otevírací doba</h4>
+                <div class="space-y-2 text-green-100">
+                    <div class="flex justify-between"><span>Pondělí – Pátek</span><span>7:00 – 19:00</span></div>
+                    <div class="flex justify-between"><span>Sobota – Neděle</span><span>9:00 – 19:00</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center text-green-200 text-sm mt-20">
+            © 2026 Café Lyrata • Olomouc
+        </div>
+    </footer>
+
+    <!-- MODAL -->
+    <div id="eventModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100] p-6">
+        <div class="modal bg-white max-w-2xl w-full rounded-3xl overflow-hidden shadow-2xl">
+            <div class="relative h-96">
+                <img src="https://picsum.photos/id/1016/1200/800" alt="Akce" class="w-full h-full object-cover">
+                <button onclick="closeModal()" 
+                        class="absolute top-6 right-6 bg-white/90 hover:bg-white w-12 h-12 rounded-2xl flex items-center justify-center text-3xl font-light">
+                    ×
+                </button>
+                <div class="absolute bottom-8 left-8 text-white">
+                    <h2 class="text-5xl heading-font font-light">Rooftop Pilates a skupinový brunch</h2>
+                </div>
+            </div>
+            <div class="p-10">
+                <div class="prose prose-lg text-gray-600 max-w-none">
+                    <p>Přijďte si protáhnout tělo a zklidnit mysl na krásné terase naší budovy a vychutnejte si s námi společnou snídani.</p>
+                    <p>Po cvičení následuje společný brunch s výběrovou kávou a drobným pečivem z naší kavárny.</p>
+                </div>
+
+                <div class="mt-10">
+                    <a href="https://www.reservio.com/cs" target="_blank"
+                       class="block w-full bg-[#4a6b2f] hover:bg-[#3d5a27] text-white text-center py-5 rounded-2xl font-medium text-lg transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-calendar"></i>
+                        Rezervovat přes Reservio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showEventDetail() {
+            document.getElementById('eventModal').classList.remove('hidden');
+            document.getElementById('eventModal').classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('eventModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = 'visible';
+        }
+
+        document.getElementById('eventModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") {
+                const modal = document.getElementById('eventModal');
+                if (!modal.classList.contains('hidden')) closeModal();
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
